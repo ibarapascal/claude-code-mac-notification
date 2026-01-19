@@ -4,10 +4,10 @@ macOS 系统通知脚本，当 Claude Code 需要你关注时发送桌面通知�
 
 ## 功能
 
-- 🔔 桌面通知提醒（标题显示 `Claude:<项目名>`）
-- 🖱️ 点击通知跳转到对应 IDE
-- 🔊 可自定义通知声音
-- ⚡ **热更新**：修改脚本后立即生效，无需重启 Claude Code
+- 桌面通知提醒（标题显示 `Claude:<项目名>`）
+- 点击通知跳转到对应应用（IDE 或 Terminal.app）
+- 可自定义通知声音
+- **热更新**：修改脚本后立即生效，无需重启 Claude Code
 
 ## 依赖
 
@@ -45,24 +45,25 @@ brew install terminal-notifier jq
 编辑 `notify.sh` 顶部的用户配置区域：
 
 ```bash
-IDE_APP="vscode"    # 你使用的 IDE
+IDE_APP="terminal"  # terminal / vscode / cursor / zed 等
 SOUND="Tink"        # 通知声音
 ```
 
-### 支持的 IDE
+### 支持的应用
 
-| IDE | 配置值 | URL Scheme |
-|-----|--------|------------|
-| VS Code | `vscode` | `vscode://file/path` |
-| Cursor | `cursor` | `cursor://file/path` |
-| Windsurf | `windsurf` | `windsurf://file/path` |
-| Zed | `zed` | `zed://file/path` |
-| Sublime Text | `sublime` | `subl://open?url=file:///path` |
-| IntelliJ IDEA | `idea` | `idea://open?file=/path` |
-| WebStorm | `webstorm` | `webstorm://open?file=/path` |
-| PyCharm | `pycharm` | `pycharm://open?file=/path` |
+| 应用 | 配置值 | 说明 |
+|-----|--------|------|
+| **Terminal.app** | `terminal` | 跳转到发出通知的终端窗口/标签页 |
+| VS Code | `vscode` | URL Scheme 跳转 |
+| Cursor | `cursor` | URL Scheme 跳转 |
+| Windsurf | `windsurf` | URL Scheme 跳转 |
+| Zed | `zed` | URL Scheme 跳转 |
+| Sublime Text | `sublime` | URL Scheme 跳转 |
+| IntelliJ IDEA | `idea` | URL Scheme 跳转 |
+| WebStorm | `webstorm` | URL Scheme 跳转 |
+| PyCharm | `pycharm` | URL Scheme 跳转 |
 
-> 如果你的 IDE 不在列表中，可以在 `build_url()` 函数中添加支持。
+> Terminal.app 模式通过 TTY 识别窗口，使用 AppleScript 激活对应标签页。
 > 设置 `IDE_APP=""` 可禁用点击跳转功能。
 
 ### 可用声音
